@@ -1,0 +1,115 @@
+h1{
+  padding-top: 30px;
+  color: #d9237b;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 25px;
+  padding-left: 20px;
+  text-align: center;
+}
+
+ul{
+  list-style: none;
+  display: flex;
+  padding: 0;
+}
+
+ul li {
+  margin-right: 20px; 
+}
+
+
+
+ul li a img {
+  width: 30px; 
+  height: 30px; 
+}
+
+
+
+
+
+
+
+
+
+
+#p1{
+margin-top: 60px;
+margin-left: 38%;
+color: rgb(252, 248, 248);
+}
+
+#p2{
+margin-top: 40px;
+margin-left: 38%;
+color: rgb(255, 254, 254);
+
+}
+
+
+#refString{
+width: auto;
+margin-left: 6%;
+background-color: #f6f6f7;
+
+}
+#refString:hover{
+background-color: transparent;
+color: azure;
+}
+
+
+
+#frameCount{
+width: 45px;
+margin-left: 4%;
+background-color: #f3f4f5;
+}
+#frameCount:hover{
+background-color: transparent;
+color: azure;
+}
+
+
+
+button{
+background-color: #f5f6f8;
+margin-top: 2%;
+margin-left: 4%;
+}
+button:hover{
+background-color: transparent;
+color: azure;
+}
+
+
+
+
+body {
+  background-image: url("background.jpg");
+  background-size: cover;
+}
+
+
+
+
+table {
+ border: 2px solid rgb(252, 251, 251);
+  margin-top: 3%;
+  margin-left: 4%;
+}
+
+
+td {
+  text-align: center;
+  border: 1px solid rgb(246, 241, 241);
+  color: azure;
+}
+
+
+#pageFaultDisplay {
+  margin-top: 2%;
+  margin-left: 4%;
+  font-size: 18px;
+  color: azure;
+}

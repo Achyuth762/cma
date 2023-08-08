@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Optimal Page Replacement Algorithm</title>
+  <link rel="stylesheet" href="o-style.css">
+ 
+</head>
+<body>
+  <ul>
+    <li><a href="f.html"><img src="back-arrow.png"></a></li>
+    <li><a href="D:\cma-project\index.html"><img src="home.png"></a></li>
+    <li><a href="lru.html"><img src="next.png"></a></li>
+  </ul>
+  
+
+
+
+
+ 
+  <h1><u>Optimal Page Replacement Algorithm</u></h1>
+  <p id="p1">Number of Frames <input type="number" id="frameCount" value="3" required min="3" max="4"></p>
+  <p id="p2">Reference String <input type="text" id="refString" value="7,0,1,2,0,3,0,4,2,3,0,3,2,1,2"></p>
+
+  <center><button onclick="simulateOptimal()">Submit</button>
+    
+  <table id="memory">
+  </table>
+
+  <div id="pageFaultDisplay"></div></center>
+
+  <script>
+    function clearMemoryTable() {
+      const memoryTable = document.getElementById("memory");
+      memoryTable.innerHTML = ""; // Clear the existing table content
+    }
+
+    function simulateOptimal() {
+      clearMemoryTable(); // Clear the existing table before running the simulation
+
+      const frameCount = parseInt(document.getElementById("frameCount").value);
+      const refString = document.getElementById("refString").value
+        .split(",")
+        .map(Number);
+
+      let frames = Array(frameCount).fill(null);
+      const memoryTable = document.getElementById("memory");
+      const pageFaultDisplay = document.getElementById("pageFaultDisplay");
+
+      const addToMemoryTable = () => {
+        const row = document.createElement("tr");
+        frames.forEach((page) => {
+          const cell = document.createElement("td");
+          cell.textContent = page === null ? "-" : page;
+          row.appendChild(cell);
+        });
+        memoryTable.appendChild(row);
+      };
+
+      let pageFaultCount = 0;
+
+      refString.forEach((page, index) => {
+        if (!frames.includes(page)) {
+          // Page fault occurred
+          pageFaultCount++;
+
+          if (frames.includes(null)) {
+            // If there is an empty frame, add the page to it
+            const emptyFrameIndex = frames.indexOf(null);
+            frames[emptyFrameIndex] = page;
+          } else {
+            // If no empty frame, find the page to be replaced using Optimal algorithm
+            const pagesInFuture = refString.slice(index + 1);
+            const pagesToBeReplaced = frames.map((frame) =>
+              pagesInFuture.indexOf(frame) === -1 ? Infinity : pagesInFuture.indexOf(frame)
+            );
+            const pageToBeReplacedIndex = pagesToBeReplaced.indexOf(Math.max(...pagesToBeReplaced));
+            frames[pageToBeReplacedIndex] = page;
+          }
+        }
+
+        addToMemoryTable();
+      });
+
+      pageFaultDisplay.textContent = `Optimal Page Fault Count: ${pageFaultCount}`;
+
+      // After simulation, create the frame headers
+      const frameHeaders = document.createElement("tr");
+      for (let i = 0; i < frameCount; i++) {
+        const headerCell = document.createElement("td");
+        headerCell.textContent = `Frame ${i + 1}`;
+        frameHeaders.appendChild(headerCell);
+      }
+      memoryTable.insertBefore(frameHeaders, memoryTable.firstChild);
+    }
+  </script>
+ 
+</body>
+</html>
